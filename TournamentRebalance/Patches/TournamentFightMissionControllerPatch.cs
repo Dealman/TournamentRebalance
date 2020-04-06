@@ -36,11 +36,13 @@ namespace TournamentRebalance.Patches
                     bool isNoble = killedEnemy.HeroObject.IsNoble;
                     bool isNotable = killedEnemy.HeroObject.IsNotable;
                     bool isCommander = killedEnemy.HeroObject.IsCommander;
-                    bool isFactionLeader = killedEnemy.HeroObject.IsCommander;
+                    bool isMinorFactionLeader = killedEnemy.HeroObject.IsMinorFactionHero;
+                    bool isFactionLeader = killedEnemy.HeroObject.IsFactionLeader;
 
                     killRenownWorth = (isNoble) ? killRenownWorth + 3 : killRenownWorth;
                     killRenownWorth = (isNotable) ? killRenownWorth + 1 : killRenownWorth;
                     killRenownWorth = (isCommander) ? killRenownWorth + 1 : killRenownWorth;
+                    killRenownWorth = (isMinorFactionLeader) ? killRenownWorth + 5 : killRenownWorth;
                     killRenownWorth = (isFactionLeader) ? killRenownWorth + 10 : killRenownWorth;
 
                     RebalancedTournamentModel rebalancedTournamentModel = GetRebalancedTournamentModel();
