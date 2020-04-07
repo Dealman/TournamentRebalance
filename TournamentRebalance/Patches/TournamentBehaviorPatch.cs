@@ -12,6 +12,7 @@ namespace TournamentRebalance.Patches
     [HarmonyPatch(typeof(TournamentBehavior), "OnPlayerWinTournament")]
     public class TournamentBehaviorPatch
     {
+        // TODO: This could and probably should be merged to TournamentVMPatch instead
         static void Postfix(TournamentBehavior __instance)
         {
             if (Campaign.Current.GameMode != CampaignGameMode.Campaign)
@@ -24,9 +25,6 @@ namespace TournamentRebalance.Patches
                 {
                     GiveGoldAction.ApplyBetweenCharacters((Hero)null, Hero.MainHero, rebalancedModel.DenarsFromKills, true);
                     InformationManager.DisplayMessage(new InformationMessage($"You receive an additional {rebalancedModel.DenarsFromKills}<img src=\"Icons\\Coin@2x\"> for beating {rebalancedModel.DenarsFromKills/100} opponents.", "event:/ui/notification/coins_positive"));
-                    // Reset the properties so it's not carried over to the next tournament
-                    rebalancedModel.DenarsFromKills = 0;
-                    rebalancedModel.RenownFromKills = 0;
                 }
             }
         }
@@ -65,12 +63,9 @@ namespace TournamentRebalance.Patches
             RebalancedTournamentModel rebalancedModel = GetRebalancedTournamentModel();
             if (rebalancedModel != null)
             {
-                if (rebalancedModel.DenarsFromKills > 0)
-                {
-                    // Reset the properties so it's not carried over to the next tournament
-                    rebalancedModel.DenarsFromKills = 0;
-                    rebalancedModel.RenownFromKills = 0;
-                }
+                // Reset the properties so it's not carried over to the next tournament
+                rebalancedModel.DenarsFromKills = 0;
+                rebalancedModel.RenownFromKills = 0;
             }
         }
 

@@ -41,6 +41,10 @@
       <HintPath>E:\Modding\Bannerlord\Native DLLs\SandBox.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="SandBox.ViewModelCollection">
+      <HintPath>E:\Modding\Bannerlord\Native DLLs\SandBox.ViewModelCollection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
@@ -79,6 +83,7 @@
     <Compile Include="ArenaXPController.cs" />
     <Compile Include="Patches\TournamentBehaviorPatch.cs" />
     <Compile Include="Patches\TournamentFightMissionControllerPatch.cs" />
+    <Compile Include="Patches\TournamentVMPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RebalancedTournamentModel.cs" />
     <Compile Include="TournamentRebalanceSubModule.cs" />
