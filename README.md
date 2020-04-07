@@ -50,4 +50,6 @@ This mod overrides the ```"OnRenownReward"``` method in the ```DefaultTournament
 ## Patched Classes
 This mod patches the ```"OnPlayerWinTournament"``` method in the ```TournamentBehavior``` class to provide the player with a monetary reward depending on the amount of kills they got. Uses Postfix.
 
+This mod patches the ```"OnPlayerEliminated"``` method in the ```TournamentBehavior``` class to detect if the player was eliminated and reset kill tracker. Uses Postfix.
+
 This mod also patches the ```"OnAgentRemoved"``` method in the ```TournamentFightMissionController``` class to keep track of the player's kills.
