@@ -28,9 +28,54 @@ namespace TournamentRebalance.Patches
             {
                 if(rebalancedModel.DenarsFromKills > 0)
                 {
-                    //__instance.OverallExpectedDenars = __instance.OverallExpectedDenars + rebalancedModel.DenarsFromKills;
                     GiveGoldAction.ApplyBetweenCharacters((Hero)null, Hero.MainHero, rebalancedModel.DenarsFromKills, true);
                     InformationManager.DisplayMessage(new InformationMessage($"You receive an additional {rebalancedModel.DenarsFromKills}<img src=\"Icons\\Coin@2x\"> for beating {rebalancedModel.DenarsFromKills/100} opponents.", "event:/ui/notification/coins_positive"));
+                    // Reset the properties so it's not carried over to the next tournament
+                    rebalancedModel.DenarsFromKills = 0;
+                    rebalancedModel.RenownFromKills = 0;
+                }
+            }
+        }
+
+        static bool Prepare()
+        {
+            return true;
+        }
+
+        static RebalancedTournamentModel GetRebalancedTournamentModel()
+        {
+            var gameModels = Campaign.Current.Models.GetGameModels();
+
+            // We loop through them in reverse because modded models are usually, if not always - last. Just a minor optimization
+            // Might probably be a better way of doing it than this, but it works...
+            for (int i = gameModels.Count; i-- > 0;)
+            {
+                RebalancedTournamentModel rebalancedModel = gameModels[i] as RebalancedTournamentModel;
+                if (rebalancedModel != null)
+                {
+                    return rebalancedModel;
+                }
+            }
+            return null;
+        }
+    }
+
+    [HarmonyPatch(typeof(TournamentBehavior), "OnPlayerEliminated")]
+    public class OnPlayerEliminatedPatch
+    {
+        static void Postfix(TournamentBehavior __instance)
+        {
+            if (Campaign.Current.GameMode != CampaignGameMode.Campaign)
+                return;
+
+            RebalancedTournamentModel rebalancedModel = GetRebalancedTournamentModel();
+            if (rebalancedModel != null)
+            {
+                if (rebalancedModel.DenarsFromKills > 0)
+                {
+                    // Reset the properties so it's not carried over to the next tournament
+                    rebalancedModel.DenarsFromKills = 0;
+                    rebalancedModel.RenownFromKills = 0;
                 }
             }
         }

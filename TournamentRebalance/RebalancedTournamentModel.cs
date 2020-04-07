@@ -10,13 +10,13 @@ namespace TournamentRebalance
     public class RebalancedTournamentModel : DefaultTournamentModel
     {
         // Extra Denars from Kills
-        private int denarsFromKills;
+        private int denarsFromKills = 0;
         public int DenarsFromKills {
             get { return denarsFromKills; }
             set { denarsFromKills = MBMath.ClampInt(value, 0, 65535); }
         }
         // Extra Renown from Kills
-        private int renownFromKills;
+        private int renownFromKills = 0;
         public int RenownFromKills
         {
             get { return renownFromKills; }
@@ -25,7 +25,7 @@ namespace TournamentRebalance
 
         public override int GetRenownReward(Hero winner, Town town)
         {
-            return renownFromKills;
+            return RenownFromKills;
         }
     }
 }
