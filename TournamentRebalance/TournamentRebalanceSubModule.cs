@@ -7,9 +7,6 @@ using System;
 using System.Windows;
 using HarmonyLib;
 using System.Reflection;
-using TaleWorlds.Localization;
-using System.Collections.Generic;
-using TaleWorlds.Library;
 
 namespace TournamentRebalance
 {
