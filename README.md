@@ -48,7 +48,7 @@ Then you can enable it either via the game launcher or by creating a shortcut to
 This mod overrides the ```"OnRenownReward"``` method in the ```DefaultTournamentModel``` class to return a custom amount of renown instead of a constant value.
 
 ## Patched Classes
-```"OnPlayerWinTournament"``` method in the ```TournamentBehavior``` class. Postfix.
-```"OnPlayerEliminated"``` method in the ```TournamentBehavior``` class. Postfix.
-```"OnAgentRemoved"``` method in the ```TournamentFightMissionController``` class. Postfix.
+```"OnPlayerWinTournament"``` method in the ```TournamentBehavior``` class. Postfix.  
+```"OnPlayerEliminated"``` method in the ```TournamentBehavior``` class. Postfix.  
+```"OnAgentRemoved"``` method in the ```TournamentFightMissionController``` class. Postfix.  
 ```"OnTournamentEnd"``` method in the ```TournamentVM``` class. Postfix
